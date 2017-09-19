@@ -1,0 +1,44 @@
+
+{
+  "development": {
+    "session_secret": "533aaaf35c5f55dd6b006f8b",
+    "appCookieName": "cdytwl",
+    "adminLoginPath": "/admin/login",
+    "session_share": "533aaaf35c5f55dd6b006f8c",
+    "global_url": "",
+    "db": "mysql://cdytwl:sdqwe@@12312sadsa!SD@139.108.128.77:13365/cdytwl1",
+    "session_option": {
+      "host": "139.108.128.77",
+      "port": 13365,
+      "user": "cdyt1wl",
+      "password": "sd1qwe@@12312sadsa!SD",
+      "database": "cdy1twl"
+    },
+    "adminLoginPath":"login.html",
+    "batchDownloadDir": "temp",
+    "svc_name":"cdytwl",
+    "svc_desc":"cdytwl",
+    "port":"8181"
+  }
+,
+  "production": {
+    "session_secret": "533aaaf35c5f55dd6b006f8b",
+    "appCookieName": "cdytwl",
+    "adminLoginPath": "/admin/login",
+    "session_share": "533aaaf35c5f55dd6b006f8c",
+    "global_url": "",
+    "db": "mysql://cdytwl:sdqwe@@12312sadsa!SD@39.108.168.77:13365/cdytwl",
+    "session_option": {
+      "host": "39.108.168.77",
+      "port": 13365,
+      "user": "cdytwl",
+      "password": "sdqwe@@12312sadsa!SD",
+      "database": "cdytwl"
+    },
+
+    "batchDownloadDir": "temp",
+    "svc_name":"cdytwl",
+    "svc_desc":"cdytwl",
+    "port":"8181"
+  }
+}

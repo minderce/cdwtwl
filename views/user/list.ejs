@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../_include/_headerInfo %>
+  <style>
+    .page_select1{display:none;}
+    .daq-page_select1 {margin-right: 5px;}
+    .daq-page_select1 .daq-btn{width:38px; border-radius: 1px; -webkit-border-radius: 1px; -moz-border-radius: 1px;}
+    .daq-page_select1 .daq-filter {width: 38px; height: 26px; line-height: 26px;}
+    .daq-page_select1 .daq-dropdown-menu {width: 48px; top:25px;}
+    .daq-page_select1 .daq-btn-default .daq-caret {right:10px;}
+  </style>
+</head>
+<body >
+<!--header S-->
+<% include ../_include/_head %>
+<!--header E-->
+
+
+<!--content S-->
+<div class="content clearfix">
+  <!--menu S-->
+  <% include ../_include/_menu %>
+  <!--menu E-->
+
+  <!--内容区域 S-->
+  <div class="main_iframe">
+    <!--posi S-->
+    <div class="posi_box">
+      <span>当前位置：</span><a>用户管理</a>-<a>用列表</a>
+    </div>
+    <!--posi E-->
+    <div class="wrap_con" id="list_box">
+      <div class="topd_box">
+        <div class="sear_box oper_box clearfix">
+          <input class="s_input com_input mt12 fl" v-model="searchQuery" type="text" placeholder="用户名称" >
+          <input class="s_btn s_btn_search" type="button" value="搜索" v-on:click="test(1)" />
+          <a class="oper_btn" href="tabl-edit.html"><img src="images/opa_add.png"/><span>新增</span></a>
+          <a class="oper_btn"><img src="images/opa_edit.png"/><span>编辑</span></a>
+          <a class="oper_btn"><img src="images/opa_dele.png"/><span>删除</span></a>
+        </div>
+      </div>
+
+      <div class="tbl_out">
+        <div class="tbl_scro">
+          <table class="table_con" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+              <th class="tbl_chebox"><span class="checkbox_wrap checkbox_box"><input class="check_init" type="checkbox"><label class="checkbox"></label></span></th>
+              <th class="pos_rela tal_20"><p class="desc_box desc_arr">用户名</p></th>
+              <th class="tal_15 txtc"><span>职位</span></th>
+              <th class="tal_20 "><span>电话号码</span></th>
+              <th class="tal_15"><span>邮箱</span></th>
+              <th class="tbl_state tal_10"><span>用户状态</span></th>
+              <th class="tbl_oper tal_15"><span>操作</span></th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr v-if="entitys.length<=0">
+                <td colspan="7" class="txtc"><span class="tip zwsj_tip">暂时没有数据！</span></td>
+              </tr>
+              <tr v-else="entitys.length>0"  v-for="entity in entitys">
+                <td class="tbl_chebox"><span class="checkbox_wrap checkbox_box"><input class="check_init" type="checkbox"><label class="checkbox"></label></span></td>
+                <td class="txtc"><p v-text="entity.username"></p></td>
+                <td class="txtc"><p v-text="entity.role_name"></p></td>
+                <td class="txtc"><p v-text="entity.tel"></p></td>
+                <td class="txtc"><p v-text="entity.email"></p></td>
+                <td class="txtc"><p v-html="entity.user_stat ==1 ? '<span class=green>启用</span>' :(entity.user_stat == 0 ? '<span class=orange>禁用</span>' : '<span class=gray>删除</span>' )"></p></td>
+                <td class="tbl_oper"><span class="oper_span"><a>编辑</a><a>删除</a></span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <vue-nav :parames="parames" :callback="callback" :filter-key="searchQuery" :test="test"></vue-nav>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--内容区域 E-->
+</div>
+<!--content E-->
+
+<script src="/js/vue/vue-nav.js"></script>
+<script src="/js/jquery.dropdaq.js"></script>
+<script type="text/javascript">
+  $(function(){
+//参数
+    var parames={
+      url:'/user-list.html',
+      method:'post',
+      pageSize:10,
+      cur:1,
+      search:{}
+    };
+    var app = new Vue({
+      el: '.content',
+      data:{
+        parames: parames,
+        entitys: {},
+        searchQuery: ''
+      },
+      components:{
+        'vue-nav': Vnav
+      },
+      methods:{
+        callback:function(data) {
+          this.entitys=data.data;
+        },
+        test:function(page){
+          this.parames.search.page = 2;
+
+        }
+      }
+    });
+
+
+    setTimeout(function(){
+      $('.page_select1').dropDqDefault({
+      riInput : "",
+      change: function (value, text) {
+
+//        console.log(app.set('cur',12));
+      }
+    });},1000);
+
+
+
+
+  });
+</script>
+
+</body>
+</html>

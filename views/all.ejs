@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+<head>
+    <% include _include/_headerInfo %>
+  <style>
+    .daq-page_select1 {margin-right: 5px;}
+    .daq-page_select1 .daq-btn{width:38px; border-radius: 1px; -webkit-border-radius: 1px; -moz-border-radius: 1px;}
+    .daq-page_select1 .daq-filter {width: 38px; height: 26px; line-height: 26px;}
+    .daq-page_select1 .daq-dropdown-menu {width: 48px; top:25px;}
+    .daq-page_select1 .daq-btn-default .daq-caret {right:10px;}
+
+
+    a {text-decoration:none;}
+    .search_input{font-family: "Microsoft YaHei","Arial", "SimSun";}
+    .content {padding:20px;}
+    .btn_wrap {margin-top:20px;}
+    .input_wrap {margin-top: 30px;}
+    .check_wrap {margin-top: 20px;}
+    .page_wrap {margin-top: 20px;}
+    .page1_wrap { margin-top: 20px; }
+    .tip_wrap {margin-top:20px;}
+    .payoff_wrap {margin-top: 20px;}
+
+
+  </style>
+</head>
+<body>
+
+<div class="content">
+  <input class="s_input search_input" type="text" placeholder="目的地名称" style="float: left;">
+  <select class="default" style="display: none">
+    <option value="1">请选择这里1</option>
+    <option value="2">请选择这里2</option>
+    <option value="3">请选择这里3</option>
+  </select>
+  <select class="people" style="display: none">
+    <option value="1">请选择这里4</option>
+    <option value="2">请选择这里5</option>
+    <option value="3">请选择这里6</option>
+  </select>
+  <input class="s_input com_input" type="text" placeholder="订单编号">
+  <input class="s_input input-icon input-icon-m" type="text" id="sTime" placeholder="订单发起日" value="">
+  <span class="s_mid">~</span>
+  <input class="s_input input-icon input-icon-m" type="text" id="eTime" placeholder="订单结束日" value="">
+  <button class="s_btn s_btn_search">搜索</button>
+  <div class="address clearfix" style="margin-left: 200px; margin-top: 100px;">
+    <select class="prov addrprovince"></select>
+    <select class="prov addrcity"></select>
+    <select class="prov addrcounty"></select>
+  </div>
+  <div class="btn_wrap">
+    <a href="javascript:;" class="link_btn"><img src="./images/icon/link_1.png" alt=""><span>添加</span></a>
+    <a href="javascript:;" class="link_btn"><img src="./images/icon/link_2.png" alt=""><span>编辑</span></a>
+    <a href="javascript:;" class="link_btn"><img src="./images/icon/link_3.png" alt=""><span>删除</span></a>
+    <a href="javascript:;" class="link_btn"><img src="./images/icon/link_4.png" alt=""><span>上架</span></a>
+    <a href="javascript:;" class="link_btn"><img src="./images/icon/link_5.png" alt=""><span>下架</span></a>
+    <a href="javascript:;" class="link_btn"><img src="./images/icon/link_6.png" alt=""><span>批量处理</span></a>
+    <a href="javascript:;" class="link_btn"><img src="./images/icon/link_3.png" alt=""><span>批量删除</span></a>
+  </div>
+  <div class="input_wrap">
+    <label class="lab_default">默认状态:</label><input class="s_input s_input_fb" type="text" />
+    <label class="lab_default">错误状态:</label><input class="s_input s_input_fb error" type="text" />
+  </div>
+  <div class="check_wrap" >
+    <span class="checkbox_wrap"><input class="check_init" type="checkbox"><label class="checkbox"></label>温泉</span>
+    <span class="checkbox_wrap"><input class="check_init" type="checkbox" checked="checked"><label class="checkbox active"></label>湿地公园</span>
+    <span class="radio_wrap"><input id="test11" class="deRadio" type="radio" name="test"><label class="radio active"  for="test11" name="test"></label>单选1111</span>
+    <span class="radio_wrap"><input id="test22" class="deRadio" type="radio" name="test"><label class="radio"  for="test22" name="test"></label>单选2222</span>
+    <span class="radio_wrap"><input id="test33" class="deRadio" type="radio" name="test"><label class="radio"  for="test33" name="test"></label>单选3333</span>
+  </div>
+  <div class="page_wrap clearfix">
+    <select class="page_select">
+      <option value="页">页</option>
+      <option value="1">15</option>
+      <option value="2">25</option>
+      <option value="3">35</option>
+    </select>
+    <div class="pages" id="pageDiv">
+      <a class="totpage" href="javascript:;">共145条/15页</a>
+      <a class="currfirst" href="javascript:;"></a>
+      <a class="prepage" href="javascript:;"></a>
+      <a class="curr" href="javascript:;">1</a>
+      <a href="javascript:;">2</a>
+      <a href="javascript:;">3</a>
+      <a href="javascript:;">...</a>
+      <a href="javascript:;">22</a>
+      <a href="javascript:;">23</a>
+      <a href="javascript:;">24</a>
+      <a class="nextpage" href="javascript:;"></a>
+      <a class="currlast" href="javascript:;"></a>
+    </div>
+  </div>
+  <div class="page1_wrap clearfix">
+    <select class="page_select1">
+      <option value="页">页</option>
+      <option value="1">15</option>
+      <option value="2">25</option>
+      <option value="3">35</option>
+    </select>
+    <div class="pages" id="pageDiv">
+      <a class="totpage" href="javascript:;">共145条/15页</a>
+      <a class="currfirst1" href="javascript:;">首页</a>
+      <a class="prepage1" href="javascript:;">上一页</a>
+      <a href="javascript:;">1</a>
+      <a href="javascript:;">2</a>
+      <a href="javascript:;">3</a>
+      <a href="javascript:;">...</a>
+      <a href="javascript:;">22</a>
+      <a href="javascript:;">23</a>
+      <a href="javascript:;">24</a>
+      <a class="nextpage1" href="javascript:;">下一页</a>
+      <a class="currlast1" href="javascript:;">末页</a>
+    </div>
+  </div>
+  <div class="tip_wrap">
+    <span class="tip error_tip">错误提示（用于输入错误提示）</span>
+
+    <span class="tip right_tip">正确提示（用于输入正确提示）</span>
+
+    <span class="tip wran_tip">下载账单 : 请选择要导出报表的起止时间！</span>
+
+    <span class="tip success_tip">下载账单 : 请选择要导出报表的起止时间！</span>
+
+    <span class="tip fail_tip">两次密码不一致！</span>
+
+    <span class="tip wait_tip">待审/进行中</span>
+
+    <span class="tip finish_tip">启用/已处理/已完成</span>
+
+    <span class="tip notpass_tip">启用/已处理/已完成</span>
+
+    <span class="tip sjia_tip">是否上架标识图标</span>
+
+    <span class="tip xjia_tip">是否上架标识图标</span>
+
+    <span class="tip zwsj_tip">暂时没有数据！</span>
+  </div>
+  <div class="payoff_wrap">
+    <a class="payoff pay_alipay" href="javascript:;">
+      <span class="radio_wrap"><input class="deRadio" type="radio" name="pay"><label class="radio" name="pay"></label></span>
+    </a>
+    <a class="payoff pay_wechat" href="javascript:;">
+      <span class="radio_wrap"><input class="deRadio" type="radio" name="pay"><label class="radio" name="pay"></label></span>
+    </a>
+    <a class="payoff pay_balance" href="javascript:;">
+      <span class="radio_wrap"><input class="deRadio" type="radio" name="pay"><label class="radio" name="pay"></label></span>
+      <span class="pay_b_txt">
+					<i>余额支付</i>
+					<strong>￥2897.80</strong>
+				</span>
+    </a>
+  </div>
+  <div class="btn_wrap clearfix">
+    <input class="fom_btn" type="button" value="保存">
+    <input class="fom_btn" type="button" value="退出">
+
+    <a href="javascript:;" class="select_btn">获取验证码</a>
+    <a href="javascript:;" class="select_btn sp_btn">选择</a>
+    <a href="javascript:;" class="select_btn sp_btn">上传</a>
+    <a href="javascript:;" class="bz_btn">标注</a>
+
+    <a href="javascript:;" class="lay_btn">确认</a>
+    <a href="javascript:;" class="lay_btn">取消</a>
+  </div>
+
+  <div  class="btn_wrap clearfix">
+    <a href="javascript:;" class="bz_btn link01">弹出层1</a>
+    <a href="javascript:;" class="bz_btn link02">弹出层2</a>
+    <a href="javascript:;" class="bz_btn link04">弹出层4</a>
+    <a href="javascript:;" class="bz_btn link05">弹出层5</a>
+    <a href="javascript:;" class="bz_btn link06">弹出层6</a>
+    <a href="javascript:;" class="bz_btn link07">弹出层7</a>
+    <a href="javascript:;" class="bz_btn link08">弹出层8</a>
+    <a href="javascript:;" class="bz_btn link09">弹出层9</a>
+    <a href="javascript:;" class="bz_btn link10">弹出层10</a>
+    <a href="javascript:;" class="bz_btn link11">弹出层11</a>
+    <a href="javascript:;" class="bz_btn link12">弹出层12</a>
+    <a href="javascript:;" class="bz_btn link13">弹出层13</a>
+    <a href="javascript:;" class="bz_btn link14">弹出层14</a>
+    <a href="javascript:;" class="bz_btn link15">弹出层15</a>
+    <a href="javascript:;" class="bz_btn link16">弹出层16</a>
+    <a href="javascript:;" class="bz_btn link18">弹出层18</a>
+  </div>
+
+
+
+</div>
+
+<div class="time_layer">
+  <table class="tbl_form" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="tbl_tit"><b class="mark">*</b><span>时间段：</span></td>
+      <td colspan="3"><input class="s_input input-icon input-icon-t sTime w170"  id="sTime1" type="text" value="" placeholder="2016/05/15" /><span class="s_mid">~</span><input class="s_input input-icon eTime input-icon-t w170" id="eTime1" type="text" value="" placeholder="2016/05/15" /></td>
+    </tr>
+    <tr>
+      <td class="tbl_tit"><b class="mark">*</b><span>票面价格：</span></td>
+      <td><input class="s_input w100" type="text" value="" placeholder="200" />元</td>
+      <td class="tbl_tit"><b class="mark">*</b><span>整体库存：</span></td>
+      <td><input class="s_input w100" type="text" value="" placeholder="9999" />张</td>
+    </tr>
+    <tr>
+      <td class="tbl_tit"><b class="mark">*</b><span>售卖价格：</span></td>
+      <td><input class="s_input w100" type="text" value="" placeholder="180" />元</td>
+      <td class="tbl_tit"><b class="mark">*</b><span>最少购买：</span></td>
+      <td><input class="s_input w100" type="text" value="" placeholder="1" />张</td>
+    </tr>
+    <tr>
+      <td class="tbl_tit"><b class="mark">*</b><span>结算价格：</span></td>
+      <td><input class="s_input w100" type="text" value="" placeholder="168" />元</td>
+      <td class="tbl_tit"><b class="mark">*</b><span>最多购买：</span></td>
+      <td><input class="s_input w100" type="text" value="" placeholder="100" />张</td>
+    </tr>
+    <tr>
+      <td class="tbl_tit"></td>
+      <td colspan="3">
+        <div class="layui-layer-btn layui-layer-btn-d"><a class="layui-layer-btn0">确定</a><a class="layui-layer-btn1">取消</a></div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+
+<script src="/js/jquery.nanoscroller.min.js"></script>
+<script src="/js/jquery.dropdaq.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/laydate/laydate.js"></script>
+<script src="/js/map.js"></script>
+<script src="/js/address.js"></script>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/jihe.js"></script>
+
+</body>
+</html>
