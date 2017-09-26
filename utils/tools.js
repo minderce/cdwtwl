@@ -3,6 +3,10 @@ var crypto = require('crypto');
 var db = require('../models');
 var config = require('../config.json')[process.env.NODE_ENV || 'development'];
 var tools = {};
+
+tools.SUCCESS = 1;  //成功
+tools.FAIL = 0;  //失败
+tools.ERROR = -1;  //代码错误
 tools.execute = function (func, params) {
     if (func && typeof func === 'function') {
         func(params);

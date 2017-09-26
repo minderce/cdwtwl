@@ -609,7 +609,7 @@ html #layui_layer_skinlayercss {
 }
 
 .layui-layer-dialog .layui-layer-padding {
-    padding: 9px 0px 9px 59px;
+    padding: 9px 30px 9px 59px;
     text-align: left;
     border-radius: 3px;
     -webkit-border-radius: 3px;

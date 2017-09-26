@@ -1,7 +1,7 @@
 (function () {
 
 	var tm = '<div class="page1_wrap clearfix">' +
-		'<select class="page_select1" v-model="indexs.pageSize" id="pageSel" @change="btnClick(1)"> <option>10</option><option>20</option></select>' +
+		'<select class="page_select1 fl" v-model="indexs.pageSize" id="pageSel" @change="btnClick(1)"> <option>10</option><option>20</option></select>' +
 		'<a class="totpage" href="javascript:;">共{{parames.num}}条/{{indexs.pageCount}}页</a>' +
 		'<div class="pages" id="pageDiv"> ' +
 		'<a class="prepage1" href="javascript:;" v-if="parames.cur<=1" >上一页</a>' +
@@ -18,11 +18,7 @@
 				type: [String, Number],
 				required: true
 			},
-			cur: {
-				type: [String, Number],
-				required: true
-			},
-            filterKey: String,
+            filterKey: [String, String],
 			callback: {
 				default: function () {
 					return function callback() {
@@ -33,14 +29,18 @@
 		},
 		computed: {
 			indexs: function () {
-                var filterKey = this.filterKey && this.filterKey.toLowerCase();
+                var filterKey = this.filterKey;
+
 
 				var arrs = [],obj={},
 					_self = this, parames=_self.parames,search=parames.search;
 				search.page=parames.cur;
                 search.pageSize=parames.pageSize;
                 search.search=filterKey;
-
+				for(var i = 0; i<filterKey.length; i++){
+					var item = filterKey[i];
+					search[item.name] = item.value;
+				}
 				//获取数据
 				$.ajaxSetup({
 					async : false

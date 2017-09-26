@@ -2,14 +2,7 @@
 <html>
 <head>
   <% include ../_include/_headerInfo %>
-  <style>
-    .page_select1{display:none;}
-    .daq-page_select1 {margin-right: 5px;}
-    .daq-page_select1 .daq-btn{width:38px; border-radius: 1px; -webkit-border-radius: 1px; -moz-border-radius: 1px;}
-    .daq-page_select1 .daq-filter {width: 38px; height: 26px; line-height: 26px;}
-    .daq-page_select1 .daq-dropdown-menu {width: 48px; top:25px;}
-    .daq-page_select1 .daq-btn-default .daq-caret {right:10px;}
-  </style>
+
 </head>
 <body >
 <!--header S-->
@@ -33,11 +26,10 @@
     <div class="wrap_con" id="list_box">
       <div class="topd_box">
         <div class="sear_box oper_box clearfix">
-          <input class="s_input com_input mt12 fl" v-model="searchQuery" type="text" placeholder="用户名称" >
-          <input class="s_btn s_btn_search" type="button" value="搜索" v-on:click="test(1)" />
-          <a class="oper_btn" href="tabl-edit.html"><img src="images/opa_add.png"/><span>新增</span></a>
-          <a class="oper_btn"><img src="images/opa_edit.png"/><span>编辑</span></a>
-          <a class="oper_btn"><img src="images/opa_dele.png"/><span>删除</span></a>
+          <input class="s_input com_input mt12 fl" type="text" placeholder="用户名称" name="userName">
+          <input class="s_btn s_btn_search" type="button" value="搜索" @click="search" />
+          <a class="oper_btn" @click="editUser"><img src="images/opa_add.png"/><span>新增</span></a>
+          <a class="oper_btn" @click="delUsers"><img src="images/opa_dele.png"/><span>删除</span></a>
         </div>
       </div>
 
@@ -46,7 +38,7 @@
           <table class="table_con" border="0" cellpadding="0" cellspacing="0">
             <thead>
             <tr>
-              <th class="tbl_chebox"><span class="checkbox_wrap checkbox_box"><input class="check_init" type="checkbox"><label class="checkbox"></label></span></th>
+              <th class="tbl_chebox"><span class="checkbox_wrap checkbox_box all_list_box"><input class="check_init" type="checkbox" name="all_list"><label class="checkbox"></label></span></th>
               <th class="pos_rela tal_20"><p class="desc_box desc_arr">用户名</p></th>
               <th class="tal_15 txtc"><span>职位</span></th>
               <th class="tal_20 "><span>电话号码</span></th>
@@ -59,19 +51,19 @@
               <tr v-if="entitys.length<=0">
                 <td colspan="7" class="txtc"><span class="tip zwsj_tip">暂时没有数据！</span></td>
               </tr>
-              <tr v-else="entitys.length>0"  v-for="entity in entitys">
-                <td class="tbl_chebox"><span class="checkbox_wrap checkbox_box"><input class="check_init" type="checkbox"><label class="checkbox"></label></span></td>
+              <tr v-else="entitys.length>0" v-for="entity in entitys">
+                <td class="tbl_chebox"><span class="checkbox_wrap checkbox_box list_ck_box"><input class="check_init" type="checkbox" name="list_ck" :value="entity.id"><label class="checkbox"></label></span></td>
                 <td class="txtc"><p v-text="entity.username"></p></td>
                 <td class="txtc"><p v-text="entity.role_name"></p></td>
                 <td class="txtc"><p v-text="entity.tel"></p></td>
                 <td class="txtc"><p v-text="entity.email"></p></td>
                 <td class="txtc"><p v-html="entity.user_stat ==1 ? '<span class=green>启用</span>' :(entity.user_stat == 0 ? '<span class=orange>禁用</span>' : '<span class=gray>删除</span>' )"></p></td>
-                <td class="tbl_oper"><span class="oper_span"><a>编辑</a><a>删除</a></span></td>
+                <td class="tbl_oper"><span class="oper_span"><a @click="modifyUsers(entity.id)">编辑</a>|<a @click="delUsers(entity.id,entity.username)">删除</a></span></td>
               </tr>
             </tbody>
           </table>
 
-          <vue-nav :parames="parames" :callback="callback" :filter-key="searchQuery" :test="test"></vue-nav>
+          <vue-nav :parames="parames" :callback="callback" :filter-key="searchQuery"></vue-nav>
 
         </div>
       </div>
@@ -85,7 +77,7 @@
 <script src="/js/jquery.dropdaq.js"></script>
 <script type="text/javascript">
   $(function(){
-//参数
+
     var parames={
       url:'/user-list.html',
       method:'post',
@@ -93,12 +85,13 @@
       cur:1,
       search:{}
     };
-    var app = new Vue({
+
+    new Vue({
       el: '.content',
       data:{
         parames: parames,
         entitys: {},
-        searchQuery: ''
+        searchQuery: {}
       },
       components:{
         'vue-nav': Vnav
@@ -107,27 +100,149 @@
         callback:function(data) {
           this.entitys=data.data;
         },
-        test:function(page){
-          this.parames.search.page = 2;
+        search: function() {
+          this.parames.cur = 1;
+          this.searchQuery =[{name:"userName",value:$('input[name="userName"]').val()}];
 
+        },
+        editUser:function(){
+            var obj = this;
+            layerEdit(0,0,obj);
+        },
+        modifyUsers:function(id){
+          var obj = this;
+          layerEdit(1, id, obj);
+        },
+        delUsers: function(id,userName){
+            delFun('/user-del.html',userName,id);
         }
+
       }
     });
+    //
+    /**
+     * 编辑用户信息
+     * @param type 编辑类型（0添加，1编辑）
+     * @param id 编辑ID
+     * */
+    function layerEdit(type,id,obj){
 
+      layer.open({
+        type: 1,
+        title : "新增用户",
+        skin: 'lay_tips_fk', //样式类名
+        closeBtn: 1, //不显示关闭按钮
+        shift: 0,
+        yes: function(index, layero){
+         var userBody = $("#userEdit").serialize(),
+                 userUrl = '/user-edit.html';
 
-    setTimeout(function(){
-      $('.page_select1').dropDqDefault({
-      riInput : "",
-      change: function (value, text) {
+          if(id > 0){
+              userUrl ='/user-modify.html';
+          }
+          $.ajax({
+            type:"post",
+            url:userUrl,
+            data: userBody,
+            success: function(data){
+              layer.close(index);
+              if(data.status == 1){
+                layer.msg(data.msg, {
+                  icon: 6,
+                  shift: 6,    // 出现的动画效果
+                  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                }, function(){
+                   location.href=location.href;
+                });
+              }else{
+                layer.open({
+                  type: 1,  // 弹出层类型 0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                  skin: 'layui-layer-demo', //样式类名
+                  closeBtn: 0, //不显示关闭按钮
+                  shift: 6,    // 出现的动画效果
+                  title : false, // 是否显示标题
+                  time: 2000, //2s后自动关闭
+                  area : ["160px", "110px"],  // 页面大小
+                  shadeClose: true, //开启遮罩关闭
+                  content: '<div class="smail_lay"><img src="./images/smile.png" /><p>'+data.msg+'</p></div>',
+                  function(){ }
+                });
+              }
+            }
+          });
+          // 提示信息
+         // $('.lay_tiprow').addClass('lay_tipsuccess').html('<span class="tip success_tip">验证码已发送到您的手机，请注意查收！</span>');
+        },
+        cancel: function(index){
 
-//        console.log(app.set('cur',12));
-      }
-    });},1000);
+        },
+        area: ['450px', '460px'],
+        shadeClose: true, //开启遮罩关闭
+        content: '<div class="tipcon_wrap tipcon_tjzd"><form id="userEdit"><input type="hidden" name="role_name"/><input type="hidden" name="Id"/>' +
+        '<div class="input_row clearfix" ><label class="lab_default"><b class="mark">*</b>用户名：</label><input class="s_input s_input_fb w240" type="text" name="username"/></div>' +
+        '<div class="input_row clearfix" ><label class="lab_default"><b class="mark">*</b>用户密码：</label><input class="s_input s_input_fb w240" type="password" name="passwords"/></div>' +
+        '<div class="input_row clearfix" ><label class="lab_default fl">用户职位：</label><select class="select-sjzd" name="role_id"></select></div>' +
+        '<div class="input_row clearfix" ><label class="lab_default fl">用户状态：</label><span class="radio_wrap tytk_radio"><input class="deRadio" type="radio" name="user_stat" checked="checked" value="1"><label class="radio tytk_radio active" name="user_stat"></label>启动</span><span class="radio_wrap tytk_radio"><input class="deRadio" type="radio" name="user_stat" value="0"><label class="radio tytk_radio" name="user_stat"></label>禁用</span> </div>' +
+        '<div class="input_row clearfix" ><label class="lab_default">电话号码：</label><input class="s_input s_input_fb w240" type="text" name="tel"/></div>' +
+        '<div class="input_row clearfix" ><label class="lab_default">电子邮箱：</label><input class="s_input s_input_fb w240" type="text" name="email"/></div>' +
+        '<div class="layui-layer-btn layui-layer-btn-d"><a class="layui-layer-btn0">确定</a><a class="layui-layer-btn1">取消</a></div></form></div>'
 
+      });
+      $.ajax({
+        type:"post",
+        url:"/job.html",
+        success: function(data){
+          var str = '';
+          data.entitys.forEach(function(item){
+            str += '<option value="'+item.Id+'">' + item.role_name + '</option>';
+          });
+          $(".select-sjzd").html(str);
 
+          if(id > 0){
+            $.ajax({
+              type:"get",
+              url:"/user-modify.html",
+              data:{id:id},
+              success: function(data){
+                var entity =data.entity;
+                $("input[name='username']").val(entity.username);
+                $("input[name='Id']").val(entity.Id);
+                //$("input[name='passwords']").val(entity.passwords);
+                $("input[name='tel']").val(entity.tel);
+                $("input[name='email']").val(entity.email);
+                $("input[name='user_stat'][value='"+entity.user_stat+"']").click();
+                $(".select-sjzd").val(entity.role_id);
+                $('.select-sjzd').dropDqDefault({
+                  riInput : "",
+                  change: function (value, text) {
+                    console.log('You picked: ' + value + ':' + text);
+                    $("input[name='role_name']").val(text);
+                  }
+                });
+              }
+            });
+          }else{
+            $('.select-sjzd').dropDqDefault({
+              riInput : "",
+              change: function (value, text) {
+                console.log('You picked: ' + value + ':' + text);
+                $("input[name='role_name']").val(text);
+              }
+            });
+          }
+
+        }
+      });
+
+    }
 
 
   });
+
+  $('body').on('click', '.radio_wrap', function(e){
+    radio($(this));
+  })
+
 </script>
 
 </body>

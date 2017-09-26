@@ -11,6 +11,9 @@ module.exports=function(sequelize,DataTypes){
             allowNull:false
         },
         name: DataTypes.STRING,         //菜单名称
+        pid:DataTypes.INTEGER,          //父级
+        sort:DataTypes.INTEGER,          //父级
+        isMenu:DataTypes.INTEGER,       //是否为菜单 1=是菜单 0=否菜单
         url: DataTypes.STRING,         //链接地址
         icon: DataTypes.STRING         //小图标
     },{

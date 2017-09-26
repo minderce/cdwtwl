@@ -41,12 +41,12 @@
 .link_btn img {margin: 10px 6px 0 24px; vertical-align: top; height: 14px;}
 .link_btn span {display: inline-block; *display: *inline; *zoom:1; padding-right:22px; margin-top: 8px;}
 .checkbox{position: absolute; left: 0; top: 1px;  width: 15px;height: 15px; display: block; float: none; background: url(../images/icon/checkbox_ch.png) no-repeat 0px 0px; cursor: pointer;}
-.checkbox_wrap {display: inline-block; *display: inline; *zoom:1; position:relative; padding-left: 20px; cursor: pointer;}
+.checkbox_wrap {display: inline-block; *display: inline; *zoom:1; position:relative; padding-left: 20px; padding-right:10px; margin:3px 0; cursor: pointer;}
 .check_init {display: none;}
 .checkbox.active{width: 15px;height: 15px; border-color: #fa9927;  background-position:0px -42px;}
-.radio_wrap {display: inline-block; *display: inline; *zoom:1; position:relative; cursor: pointer;}
+.radio_wrap {display: inline-block; *display: inline; *zoom:1; position:relative; margin-right:10px; cursor: pointer;}
 .deRadio {display: none;}
-.radio {display: inline-block; display: *inline; *zoom:1; width: 15px; height: 15px;  background:url(../images/icon/radio_ra.png) no-repeat 0px 0px; cursor: pointer; vertical-align: top;}
+.radio {display: inline-block; display: *inline; *zoom:1; width: 15px; height: 15px;  background:url(../images/icon/radio_ra.png) no-repeat 0px 0px; cursor: pointer; vertical-align: sub;}
 .radio.active {background-position: 0px -45px;}
 /* tip 提示 */
 .tip { font-size:12px; line-height:16px; display: inline-block; *display: inline; *zoom:1; margin-left: 2px; background: url(../images/icon/tip_icon.png) no-repeat; text-indent: 20px;}
@@ -88,7 +88,7 @@
 .lay_tips_tk .radio_wrap .radio {top:3px;}
 .tipcon_tjzd {margin-top: 30px; text-align: left;}
 .tipcon_fk {margin-top: 30px; }
-.tipcon_tjzd .lab_default {margin-left: 49px; width:130px; text-align: right;}
+.tipcon_tjzd .lab_default { width:127px; text-align: right;}
 .tipcon_fxxx {margin-top: 10px;}
 .tipcon_fxxx .layui-layer-btn {text-align: left; margin-left: 167px;}
 .tipcon_fxxx .lab_default {margin-left: 39px;}
@@ -230,7 +230,7 @@
 
 /* 分页 */
 .pages a,.totpage {display:inline-block; *display: inline; *zoom:1; float: left; margin-right: 5px; padding:0 10px; font:normal 12px/26px "Arial","Microsoft YaHei"; color: #565656; background-color: #ffffff; border:1px solid #e5e5e5; border-radius: 1px; -webkit-border-radius: 1px; -moz-border-radius: 1px;}
-.pages a:hover,.pages a.curr,.totpage:hover {background-color: #4f9acd; border-color: #4f9acd; color: #fff;}
+.pages a:hover,.pages a.current,.totpage:hover {background-color: #4f9acd; border-color: #4f9acd; color: #fff;}
 .currfirst {width:6px; height: 26px; background: url(../images/icon/page_icon.png) no-repeat 9px 10px; }
 .currfirst:hover {background-position: 9px -12px;}
 .prepage {width:6px; height: 26px; background: url(../images/icon/page_icon.png) no-repeat 12px -33px; }
@@ -251,7 +251,7 @@
 
 .w80 {width:66px;}
 .w100 {width:88px;}
-.w120 {width:108px;}
+.w120 {width:120px;}
 .w150 {width:138px;}
 .w170 {width: 160px;}
 .w240 {width:230px;}

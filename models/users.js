@@ -16,6 +16,7 @@ module.exports=function(sequelize,DataTypes){
         tel: DataTypes.STRING,          //电话号码
         email: DataTypes.STRING,        //邮箱
         role_name: DataTypes.STRING,    //职务名称
+        role_id: DataTypes.INTEGER,    //职务id
         user_stat: DataTypes.INTEGER    //状态(1=启动，0=禁用，-1=删除)
     },{
         // 自定义表名

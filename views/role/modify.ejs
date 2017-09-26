@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../_include/_headerInfo %>
+</head>
+<body>
+<!--header S-->
+<% include ../_include/_head %>
+<!--header E-->
+
+
+<!--content S-->
+<div class="content clearfix">
+  <!--menu S-->
+  <% include ../_include/_menu %>
+  <!--menu E-->
+
+  <!--内容区域 S-->
+  <div class="main_iframe">
+    <!--posi S-->
+    <div class="posi_box">
+      <span>当前位置：</span><span>基础信息管理</span>-<a href="/role-list.html">职位管理</a>
+    </div>
+    <!--posi E-->
+    <div class="wrap_con">
+      <div class="tbl_box bg_white mt11">
+        <div class="tbl_box">
+          <form id="subRole">
+            <input type="hidden" name="id" value="<%=roleEntity.Id%>"/>
+          <table class="tbl_form" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td class="tbl_tit"><span>职位名称：</span></td>
+              <td colspan="2"><input class="s_input s_input_fb w318" type="text" name="roleName" value="<%=roleEntity.role_name%>"></td>
+            </tr>
+            <tr>
+              <td rowspan="<%=menuLen-1%>" class="tbl_tit"><span>角色权限：</span></td>
+              <td colspan="2"><span class="checkbox_wrap all_checkbox"><input class="check_init" type="checkbox"><label class="checkbox"></label>全选/全不选</span></td>
+            </tr>
+            <% entitys.forEach(function(item){%>
+              <tr class="role_child">
+                <td rowspan="<%=item.childMenus.length%>" class="w150" >
+                  <span class="checkbox_wrap checkbox_menus" data-tag="checkbox_<%=item.Id%>">
+                    <input class="check_init" type="checkbox">
+                    <label class="checkbox"></label><%=item.name%>
+                  </span>
+                </td>
+                <%item.childMenus.forEach(function(childMen,i){ if(i == 0){%>
+                <td>
+                    <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                      <input class="check_init"  name="role" type="checkbox" value="0-<%=childMen.Id%>" <%-roleList.indexOf("0-" + childMen.Id )<0 ? "" : "checked='checked'"%> >
+                      <label class="checkbox  <%-roleList.indexOf("0-" + childMen.Id )<0 ? "" : "active"%>"></label>查看<%=childMen.name%>
+                    </span>
+
+                  <%if(outers.indexOf(childMen.name) < 0){%>
+                  <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                        <input class="check_init" name="role" type="checkbox" value="1-<%=childMen.Id%>" <%-roleList.indexOf("1-" + childMen.Id )<0 ? "" : "checked='checked'"%>>
+                        <label class="checkbox <%-roleList.indexOf("1-" + childMen.Id )<0 ? "" : "active"%>"></label>查看个人<%=childMen.name%>
+                      </span>
+                  <%}%>
+                  <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                      <input class="check_init" name="role" type="checkbox" value="2-<%=childMen.Id%>" <%-roleList.indexOf("2-" + childMen.Id )<0 ? "" : "checked='checked'"%>>
+                      <label class="checkbox <%-roleList.indexOf("2-" + childMen.Id )<0 ? "" : "active"%>"></label>新增<%=childMen.name%>
+                    </span>
+                  <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                      <input class="check_init" name="role" type="checkbox" value="3-<%=childMen.Id%>" <%-roleList.indexOf("3-" + childMen.Id )<0 ? "" : "checked='checked'"%>>
+                      <label class="checkbox <%-roleList.indexOf("3-" + childMen.Id )<0 ? "" : "active"%>"></label>编辑<%=childMen.name%>
+                    </span>
+                  <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                      <input class="check_init" name="role" type="checkbox" value="4-<%=childMen.Id%>" <%-roleList.indexOf("4-" + childMen.Id )<0 ? "" : "checked='checked'"%>>
+                      <label class="checkbox <%-roleList.indexOf("4-" + childMen.Id )<0 ? "" : "active"%>"></label>删除<%=childMen.name%>
+                    </span>
+                </td>
+
+                <%}})%>
+
+              </tr>
+            <%item.childMenus.forEach(function(childMen,i){ if(i > 0){%>
+                <tr class="role_child">
+                  <td>
+                    <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                      <input class="check_init"  name="role" type="checkbox" value="0-<%=childMen.Id%>" <%-roleList.indexOf("0-" + childMen.Id )<0 ? "" : "checked='checked'"%> >
+                      <label class="checkbox  <%-roleList.indexOf("0-" + childMen.Id )<0 ? "" : "active"%>"></label>查看<%=childMen.name%>
+                    </span>
+
+                    <%if(outers.indexOf(childMen.name) < 0){%>
+                    <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                        <input class="check_init" name="role" type="checkbox" value="1-<%=childMen.Id%>" <%-roleList.indexOf("1-" + childMen.Id )<0 ? "" : "checked='checked'"%>>
+                        <label class="checkbox <%-roleList.indexOf("1-" + childMen.Id )<0 ? "" : "active"%>"></label>查看个人<%=childMen.name%>
+                      </span>
+                    <%}%>
+                    <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                      <input class="check_init" name="role" type="checkbox" value="2-<%=childMen.Id%>" <%-roleList.indexOf("2-" + childMen.Id )<0 ? "" : "checked='checked'"%>>
+                      <label class="checkbox <%-roleList.indexOf("2-" + childMen.Id )<0 ? "" : "active"%>"></label>新增<%=childMen.name%>
+                    </span>
+                    <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                      <input class="check_init" name="role" type="checkbox" value="3-<%=childMen.Id%>" <%-roleList.indexOf("3-" + childMen.Id )<0 ? "" : "checked='checked'"%>>
+                      <label class="checkbox <%-roleList.indexOf("3-" + childMen.Id )<0 ? "" : "active"%>"></label>编辑<%=childMen.name%>
+                    </span>
+                    <span class="checkbox_wrap checkbox_<%=item.Id%>s">
+                      <input class="check_init" name="role" type="checkbox" value="4-<%=childMen.Id%>" <%-roleList.indexOf("4-" + childMen.Id )<0 ? "" : "checked='checked'"%>>
+                      <label class="checkbox <%-roleList.indexOf("4-" + childMen.Id )<0 ? "" : "active"%>"></label>删除<%=childMen.name%>
+                    </span>
+                  </td>
+                </tr>
+            <%}})%>
+            <%})%>
+            <tr>
+              <td class="tbl_tit"></td>
+              <td colspan="2">
+                <input class="fom_btn sub_btn" type="button" value="保存">
+                <input class="fom_btn" type="button" value="返回">
+              </td>
+            </tr>
+          </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--内容区域 E-->
+</div>
+<!--content E-->
+<script>
+
+  var checkbox_menus =$(".checkbox_menus").length,ckLen=0;
+  for(var i = 0; i<checkbox_menus; i++){
+    var isT = 0;
+    var dataTag = $(".checkbox_menus:eq("+i+")").attr("data-tag");
+
+    var daLen = $("."+dataTag+"s").length;
+
+    for(var j = 0; j<daLen; j++){
+
+      if(!$("."+dataTag+"s:eq("+j+") .checkbox").hasClass("active")){
+        isT = 1;
+        console.log(isT);
+        break;
+      }
+    }
+
+    if(isT == 0){
+      $(".checkbox_menus:eq("+i+")").find('.checkbox').addClass('active');
+      $(".checkbox_menus:eq("+i+")").find('.checkbox').siblings("input[type='checkbox']").attr('checked','checked')
+
+    }
+  }
+  for(var i = 0; i<checkbox_menus; i++){
+
+    if(!$(".checkbox_menus:eq("+i+") .checkbox").hasClass("active")){
+      ckLen = 1;
+      break;
+    }
+  }
+
+  if(ckLen == 0){
+    $(".all_checkbox").find('.checkbox').addClass('active');
+    $(".all_checkbox").find('.checkbox').siblings("input[type='checkbox']").attr('checked','checked')
+
+  }
+
+  //全选／反选
+  $(".all_checkbox").click(function(){
+    var dataTag = "checkbox_menus";
+    var dataLen =$("."+dataTag).length;
+    if($(this).find(".checkbox").hasClass("active")){
+      for(var i=0; i<dataLen ; i++){
+        if($(".checkbox_menus:eq("+i+") .checkbox").hasClass("active")){
+          $(".checkbox_menus:eq("+i+")").click();
+        }
+      }
+    }else{
+      for(var i=0; i<dataLen ; i++){
+        if(!$(".checkbox_menus:eq("+i+") .checkbox").hasClass("active")){
+          $(".checkbox_menus:eq("+i+")").click();
+        }
+      }
+    }
+  });
+  //父级选择
+  $(".checkbox_menus").click(function(){
+      var dataTag = $(this).attr("data-tag") + "s";
+    if($(this).find('.checkbox').hasClass('active')){
+      $("."+dataTag).find('.checkbox').removeClass('active');
+      $("."+dataTag).find('.checkbox').siblings("input[type='checkbox']").removeAttr('checked')
+    }else{
+      $("."+dataTag).find('.checkbox').addClass('active');
+      $("."+dataTag).find('.checkbox').siblings("input[type='checkbox']").attr('checked','checked')
+
+    }
+  });
+
+  //提交代码
+  $(".sub_btn").click(function(){
+    var str =$("#subRole").serialize();
+    $.ajax({
+      type:"post",
+      url:"/role-modify.html",
+      data:$("#subRole").serialize(),
+      success: function(data){
+        if(data.status == 1){
+          layer.msg('编辑成功!', {
+            icon: 6,
+            shift: 6,    // 出现的动画效果
+            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+          }, function(){
+            location.href="/role-list.html";
+          });
+
+        }else{
+          layer.open({
+            type: 1,  // 弹出层类型 0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+            skin: 'layui-layer-demo', //样式类名
+            closeBtn: 0, //不显示关闭按钮
+            shift: 6,    // 出现的动画效果
+            title : false, // 是否显示标题
+            time: 2000, //2s后自动关闭
+            area : ["160px", "110px"],  // 页面大小
+            shadeClose: true, //开启遮罩关闭
+            content: '<div class="smail_lay"><img src="./images/smile.png" /><p>'+data.msg+'</p></div>',
+            function(){ }
+          });
+
+        }
+
+      }
+    });
+  })
+</script>
+</body>
+</html>

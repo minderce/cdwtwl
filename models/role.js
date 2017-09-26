@@ -10,7 +10,8 @@ module.exports=function(sequelize,DataTypes){
             primaryKey:true,
             allowNull:false
         },
-        name: DataTypes.STRING,         //权限名称
+        role_name: DataTypes.STRING,         //权限名称
+        type:DataTypes.INTEGER,         //权限类型 0=职位，1=权限名称
         m_id: DataTypes.STRING,         //菜单编号
         role_level: DataTypes.INTEGER   //0=查 1=新增 2=修改 3=删除 4=打印
     },{

@@ -21,11 +21,11 @@
         <form action="#" name="myLogin" id="myLogin"  method="post">
           <div class="input_outer">
             <span class="u_user"></span>
-            <input name="name" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+            <input name="name" class="text_login" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
           </div>
           <div class="input_outer">
             <span class="us_uer"></span>
-            <input name="pwd" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="password" placeholder="请输入密码">
+            <input name="pwd" class="text_login" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="password" placeholder="请输入密码">
           </div>
           <div class="mb2"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">登录</a></div>
         </form>
@@ -48,7 +48,12 @@
               url: "/login.html",
               data: $("#myLogin").serialize(),
               success: function (result) {
-                  console.log(result);
+
+                  if(result.status == 1){
+                      location.href='/index.html';
+                  }else{
+                      alert("用户名或密码错误");
+                  }
 
               },
               error: function(data) {
